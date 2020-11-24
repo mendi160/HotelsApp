@@ -1,0 +1,14 @@
+﻿<Window x:Class="FinalGui.Closing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinalGui"
+        mc:Ignorable="d"
+        Title="Closing" Height="200" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <ProgressBar  HorizontalAlignment="Stretch" Height="50" Margin="0 90 0 0" VerticalAlignment="Center" IsIndeterminate="True"/>
+          <TextBlock Grid.Column="0" HorizontalAlignment="Stretch" Margin="0 50 0 0"  Text="...המערכת נסגרת" TextAlignment="Center" VerticalAlignment="Top" Height="35" Width="280" Foreground="#FF050C55" FontSize="24"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,94 @@
+﻿<Page x:Class="FinalGui.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalGui"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrdersPage" Style="{StaticResource BG}">
+
+    <Grid>
+
+        <Menu x:Name="RequestFilter" Background="AliceBlue" Foreground="Black"  HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="20" MinHeight="20" Height="35" Margin="10" FlowDirection="RightToLeft"
+           IsMainMenu="True">
+            <MenuItem
+                Header="סנן לפי">
+                <MenuItem x:Name="AreaFilterBtn" 
+                     Header="אזור"
+                     FlowDirection="RightToLeft" Background="#FFF0F0F0">
+                         <MenuItem Header="הכל"  FlowDirection="RightToLeft" IsCheckable ="True" Checked="MenuItem_Checked_Area"/>
+                         <MenuItem Header="צפון" FlowDirection="RightToLeft" IsCheckable ="True" Checked="MenuItem_Checked_Area"/>
+                         <MenuItem Header="מרכז" FlowDirection="RightToLeft"  IsCheckable ="True" Checked="MenuItem_Checked_Area"/>
+                         <MenuItem Header="ירושלים" FlowDirection="RightToLeft" IsCheckable ="True" Checked="MenuItem_Checked_Area"/>
+                         <MenuItem Header="דרום" FlowDirection="RightToLeft"  IsCheckable="True" Checked="MenuItem_Checked_Area"/>
+                    </MenuItem>
+                <MenuItem x:Name="NumberFilterBtn" Click="NumberFilterBtn_Click"
+                     Header="מספר אורחים" FlowDirection="RightToLeft" >
+
+                         <MenuItem Header="ללא הגבלה" IsCheckable="True" Checked="MenuItem_Checked_Number"/>
+                         <MenuItem Header="בין 2 ל 5" IsCheckable="True" Checked="MenuItem_Checked_Number"/>
+                         <MenuItem Header="בין 5 ל10" IsCheckable="True" Checked="MenuItem_Checked_Number"/>
+                         <MenuItem Header="גדול מ10" IsCheckable="True" Checked="MenuItem_Checked_Number"/>
+                    </MenuItem>
+          
+            </MenuItem>
+        </Menu>
+        <ListView x:Name="MainListBox" Height="Auto" MaxHeight="450"  Background="LightYellow"  MinHeight="30" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="top"  Foreground="#FF292929" Margin="40">
+            <ListView.View>
+
+                <GridView >
+                    <GridViewColumn x:Name="statusView" Header="סטטוס" Width="Auto" DisplayMemberBinding="{Binding Status, Converter={StaticResource Translate}, Mode=OneWay}"/>
+                         <GridViewColumn Header="אזור" Width="Auto" DisplayMemberBinding="{Binding Area, Converter={StaticResource Translate}, Mode=OneWay}"/>
+                         <GridViewColumn x:Name="HUtypeView" Header="סוג" Width="Auto" DisplayMemberBinding="{Binding HostingType, Converter={StaticResource Translate}, Mode=OneWay}"/>
+                    <GridViewColumn Header="תאריך יציאה" Width="Auto" DisplayMemberBinding="{Binding ReleaseDate, Mode=OneWay, StringFormat=d}"/>
+                    <GridViewColumn Header="תאריך כניסה" Width="Auto" DisplayMemberBinding="{Binding EntryDate, Mode=OneWay, StringFormat=d}"  />
+                    <GridViewColumn Header="מציאת יחידות זמינות" Width=" Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="CheckAvailable"  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="בירור" Click="CheckAvailable_Click">
+                                    <materialDesign:PackIcon   Kind="BookSearch"   Height="24"  Width="24" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="צפיה" Width=" Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="ViweGuestRequestButton_Click" ToolTip="צפייה בפרטים נוספים">
+                                    <materialDesign:PackIcon    Kind="EyeSettingsOutline"   Height="24"  Width="24" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid x:Name="AvailbeHUGrid" Height="Auto"  Width="Auto"  HorizontalAlignment="Left" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="AvailableHUTextBox" Text="יחידות זמינות עבור הבקשה" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Guttman Miryam"/>
+            <ListView x:Name="AvailableHUList" HorizontalAlignment="Left" Grid.Row="1" Height="Auto"  VerticalAlignment="Top" Width="Auto" FlowDirection="RightToLeft">
+                <ListView.View >
+                    <GridView >
+                        <GridViewColumn Header="שם" Width="Auto" DisplayMemberBinding="{Binding HostingUnitName}"/>
+                        <GridViewColumn Header="אזור" Width="Auto" DisplayMemberBinding="{Binding Area,Converter={StaticResource Translate}}"/>
+                        <GridViewColumn Header="יצירת הזמנה" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="AddOrderButton" Click="AddOrderButton_Click"  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="צור הזמנה" >
+                                        <materialDesign:PackIcon   Kind="CreateNewFolder"   Height="Auto"  Width="Auto" />
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,47 @@
+﻿<Page x:Class="FinalGui.Host"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalGui"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Host" Style="{StaticResource BG}">
+
+    <Grid x:Name="hostsGrid">
+        <ListView x:Name="HsotsList" MaxHeight="450" Height="Auto"  FlowDirection="RightToLeft" Background="LightYellow" MinWidth="100" MinHeight="30" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#FF292929" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn x:Name="hostID" Header="מספר זהות" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="HUTypeTextBlock" Width="Auto"  Height="Auto" Text="{Binding Person.Id, Mode=OneTime}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="עמלה" Width="Auto" DisplayMemberBinding="{Binding TotalCommission, Mode=OneTime}"/>
+                    <GridViewColumn Header="סטטוס" Width="Auto" DisplayMemberBinding="{Binding Status, Mode=OneTime, Converter={StaticResource Translate}}"/>
+                    <GridViewColumn Header="מחיקה" Width=" Auto">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button x:Name="DeleteHost" Click="DeleteHost_Click" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="לחץ כאן עבור מחיקת המארח">
+                                    <materialDesign:PackIcon   Kind="TrashCan"   Height="24"  Width="24" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="צפיה" Width=" Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="viewHost" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"  ToolTip="לחץ כאן לצפיה בכל פרטי המארח">
+                                    <materialDesign:PackIcon    Kind="EyeSettingsOutline"   Height="24"  Width="24" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

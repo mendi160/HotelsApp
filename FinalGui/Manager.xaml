@@ -1,0 +1,60 @@
+﻿<Page x:Class="FinalGui.Manager"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalGui"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Manager" Style="{StaticResource BG}">
+
+    <Grid>
+        <Grid x:Name="configGrid" Visibility="Visible">
+            <DataGrid x:Name="ConfigList" Visibility="Visible" IsReadOnly="True" FlowDirection="RightToLeft" AutoGenerateColumns="False" HorizontalAlignment="Right" Height="Auto"  VerticalAlignment="Center" Width="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="מאפיין" Binding="{Binding Key, Mode=OneTime,Converter={StaticResource HebewTranslate} }"/>
+                <DataGridTextColumn  Header="ערך" Binding="{Binding Value, Mode=OneTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="editBtn" Content="שנה ערכים" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="Auto" Click="editBtn_Click" Margin="30"/>
+            <Button x:Name="hostBtn" Content="מארחים" HorizontalAlignment="Left"  Margin="160,0,0,30" VerticalAlignment="Bottom" Width="Auto" Click="hostBtn_Click"/>
+            <Button x:Name="GRbtn" Content="בקשות אירוח" HorizontalAlignment="Left" Margin="20,0,0,30" VerticalAlignment="Bottom" Width="Auto" Click="GRbtn_Click"/>
+            <TextBlock x:Name="ActiveHost" HorizontalAlignment="Left" Height="23" Margin="530,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
+            <TextBlock x:Name="Transactions" HorizontalAlignment="Left" Height="23" Margin="465,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
+            <Label Content="מספר המארחים הפעילים" HorizontalAlignment="Left" Margin="651,6,0,0" VerticalAlignment="Top"/>
+            <Label Content="מספר העסקאות שנסגרו בחודש האחרון" HorizontalAlignment="Left" Margin="585,25,0,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="dataGridInfo" HorizontalAlignment="Left" IsReadOnly="True" AutoGenerateColumns="True" Visibility="Collapsed" Height="300"  VerticalAlignment="Center" MaxWidth="700" Width="Auto"/>
+            <Button x:Name="persontBtn" Click="persontBtn_Click" Content="אנשים" HorizontalAlignment="Left"  Margin="270,0,0,30" VerticalAlignment="Bottom" Width="Auto"/>
+            <Button x:Name="hostingunitBtn" Content="יחידות אירוח" Click="hostingunitBtn_Click" HorizontalAlignment="Left"  Margin="365,0,0,30" VerticalAlignment="Bottom" Width="Auto"/>
+            <Button x:Name="orderBtn" Content="הזמנות" Click="orderBtn_Click" HorizontalAlignment="Left"  Margin="495,0,0,30" VerticalAlignment="Bottom" Width="Auto"/>
+        </Grid>
+        <Grid  x:Name="editGrid" Visibility="Collapsed"  Height="100" Width="270" HorizontalAlignment="Right" Background="OldLace" Margin="0,175,0,174.6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="cfgTextBox" TextCompositionManager.PreviewTextInput="cfgTextBox_PreviewTextInput"  Height="Auto" Width="Auto" Grid.Row="0" Grid.Column="0"/>
+            <ComboBox x:Name="cfgComboBox" Height="Auto" Width="Auto" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="UpdateBTN" Content="עדכן" HorizontalAlignment="Center" Click="UpdateBTN_Click" Grid.Row="1" Grid.Column="1">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=cfgComboBox}" Value="{x:Null}">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=cfgTextBox, Path=Text}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="BackBtn" Grid.Row="1" Content="בטל" HorizontalAlignment="Center" Grid.Column="0" Width="Auto" Click="BackBtn_Click"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,106 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalGui"
+      xmlns:BO="clr-namespace:BO;assembly=BL"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="FinalGui.AddHostingUnitPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="הוספת יחידת אירוח">
+
+     <Page.Resources>
+          <CollectionViewSource x:Key="hostingUnitViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:HostingUnit}, CreateList=True}"/>
+          <local:BoolToYeshEn x:Key="Yes_En"/>
+
+
+
+     </Page.Resources>
+     <Page.Style>
+          <StaticResource ResourceKey="BG"/>
+     </Page.Style>
+
+     <Grid>
+
+          <Grid x:Name="AddHUGrid" VerticalAlignment="Center"  Height="Auto" Margin="30" HorizontalAlignment="Right" >
+               <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+               </Grid.RowDefinitions>
+               <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+               </Grid.ColumnDefinitions>
+               <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="3" Text="אזור" />
+               <ComboBox x:Name="areaComboBox" Height="Auto" Margin ="3" Grid.Row="0"  VerticalAlignment="Center" Text="{Binding Area ,Converter={StaticResource Translate}}"  Width="120"/>
+               <TextBlock VerticalAlignment="Center" Grid.Row="1" Margin="3" Text="שם היחידה"/>
+               <TextBox x:Name="hostingUnitNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding HostingUnitName, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}" Grid.Row="1" Margin="3" Height="Auto"/>
+               <TextBlock x:Name="jacuzi" Grid.Row="2" Text="ג'קוזי" />
+               <TextBlock x:Name="WIFI" Grid.Row="3" Text="WIFI" />
+               <TextBlock x:Name="SwimmingPool" Grid.Row="4" Text="בריכה פרטית" />
+               <TextBlock x:Name="TV" Grid.Row="5" Text="טלויזיה" />
+               <TextBlock x:Name="KItchen" Grid.Row="6" Text="מטבח" />
+               <TextBlock x:Name="Link1" Grid.Row="7" Text="תמונה 1" />
+               <TextBlock x:Name="Link2" Grid.Row="8" Text="תמונה 2" />
+               <TextBlock x:Name="Link3" Grid.Row="9" Text="תמונה 3" />
+               <CheckBox x:Name="JacuzziCheckBox" Content="{Binding ElementName=JacuzziCheckBox, Path=IsChecked, Converter={StaticResource Yes_En}}" IsChecked="{Binding Jacuzzi}" HorizontalAlignment="Left"  Grid.Row="2" />
+               <CheckBox x:Name="WifiCheckBox" Content="{Binding ElementName=WifiCheckBox, Path=IsChecked, Converter={StaticResource Yes_En}}" IsChecked="{Binding WIFI}" HorizontalAlignment="Left"  Grid.Row="3" />
+               <CheckBox x:Name="SwimmingPoolCheckBox" Content="{Binding ElementName=SwimmingPoolCheckBox, Path=IsChecked, Converter={StaticResource Yes_En}}" IsChecked="{Binding SwimmingPool}" HorizontalAlignment="Left"  Grid.Row="4" />
+               <CheckBox x:Name="TVCheckBox" Content="{Binding ElementName=TVCheckBox, Path=IsChecked, Converter={StaticResource Yes_En}}" IsChecked="{Binding TV}"  HorizontalAlignment="Left"  Grid.Row="5" />
+               <CheckBox x:Name="KitchenCheckBox" Content="{Binding ElementName=KitchenCheckBox, Path=IsChecked, Converter={StaticResource Yes_En}}" IsChecked="{Binding Kitchen}" HorizontalAlignment="Left"  Grid.Row="6" />
+               <StackPanel  Orientation="Horizontal" Grid.Row="7">
+                    <Button x:Name="CheckLink"   Background="Green" Click="CheckLink_Click" ToolTip="בדוק קישור" >
+                         <materialDesign:PackIcon Kind="EyeCheck"  />
+                    </Button>
+                    <TextBox x:Name="LinkTExtbox" ToolTip="הכנס קישור לתמונה מהאינטרנט" Background="White" Width="100" Text="{Binding ImageLink1}" />
+               </StackPanel>
+               <StackPanel  Orientation="Horizontal" Grid.Row="8">
+                    <Button Background="Green" Click="CheckLink_Click" ToolTip="בדוק קישור" >
+                         <materialDesign:PackIcon Kind="EyeCheck"  />
+                    </Button>
+                    <TextBox  ToolTip="הכנס קישור לתמונה מהאינטרנט" Background="White" Width="100" Text="{Binding ImageLink2}"/>
+               </StackPanel>
+               <StackPanel  Orientation="Horizontal" Grid.Row="9">
+                    <Button   Background="Green" Click="CheckLink_Click" ToolTip="בדוק קישור" >
+                         <materialDesign:PackIcon Kind="EyeCheck"  />
+                    </Button>
+                    <TextBox  ToolTip="הכנס קישור לתמונה מהאינטרנט" Background="White" Width="100"  Text="{Binding ImageLink3}"/>
+               </StackPanel>
+               <TextBlock Text="מחיר ללילה" Grid.Row="11" />
+            <TextBox Grid.Column="0" Grid.Row="11" Text="{Binding PricePerNight,Mode=TwoWay,UpdateSourceTrigger=LostFocus,StringFormat=C,ConverterCulture=he-IL}" />
+
+
+
+
+               <Button x:Name="AddButton" Click="AddButton_Click" HorizontalAlignment="Center" Content="הוסף" Width="Auto" MinWidth="60" Grid.Row="12" Grid.ColumnSpan="2">
+                    <Button.Style>
+                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                              <Style.Triggers>
+                                   <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=areaComboBox}" Value="{x:Null}">
+                                        <Setter Property="Button.IsEnabled" Value="False"/>
+                                   </DataTrigger>
+                                   <DataTrigger Binding="{Binding ElementName=hostingUnitNameTextBox, Path=Text}" Value="">
+                                        <Setter Property="Button.IsEnabled" Value="False"/>
+                                   </DataTrigger>
+                              </Style.Triggers>
+                         </Style>
+                    </Button.Style>
+               </Button>
+
+          </Grid>
+          <Image Name="ImageViewer" HorizontalAlignment="Left" MaxHeight="400" Height="Auto" VerticalAlignment="Top" MaxWidth="400" Width="Auto" />
+
+     </Grid>
+</Page>

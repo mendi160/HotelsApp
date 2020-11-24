@@ -1,0 +1,74 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:local="clr-namespace:FinalGui"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="FinalGui.AddGuestRequestPage"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddGuestRequestPage">
+    <Page.Resources>
+
+          <Style TargetType="ComboBox" x:Key="cities">
+               <Setter Property="Height" Value="Auto"/>
+               
+          </Style>
+        <CollectionViewSource x:Key="guestRequestViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:GuestRequest}, CreateList=True}"/>
+
+    </Page.Resources>
+
+    <Page.Style>
+        <StaticResource ResourceKey="BG"/>
+    </Page.Style>
+
+    <Grid >
+        <Grid x:Name="AddRequest" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="מספר מבוגרים" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <ComboBox x:Name="adultsComboBox"   Height="Auto" Margin="3" Grid.Row="5" Text="{Binding Adults, Mode=TwoWay,UpdateSourceTrigger=LostFocus, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="אזור מבוקש" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <ComboBox x:Name="areaComboBox"  Text="{Binding Area, Converter={StaticResource Translate}}" Height="Auto" Margin="3"   Grid.Row="3"  VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="מספר ילדים" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <ComboBox x:Name="childrenComboBox" Height="Auto" Margin="3" Grid.Row="6" Text="{Binding children, Mode=TwoWay,UpdateSourceTrigger=LostFocus, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="אטרקציות לילדים"  Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <ComboBox x:Name="childrensAttractionsComboBox" Text="{Binding ChildrensAttractions, Converter={StaticResource Translate}}" Height="Auto" Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="תאריך כניסה"  Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <DatePicker x:Name="entryDateDatePicker" Margin="3" Grid.Row="1"  SelectedDateChanged="entryDateDatePicker_SelectedDateChanged" VerticalAlignment="Center" DisplayDateStart="{x:Static sys:DateTime.Today}"  IsTodayHighlighted="True"/>
+            <TextBlock Text="גינה"  Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+            <ComboBox x:Name="gardenComboBox"  Text="{Binding Garden, Converter={StaticResource Translate}}" Height="Auto" Margin="3" Grid.Row="9" VerticalAlignment="Center" Width="120"/>
+               <TextBlock Text="ג'קוזי" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <ComboBox x:Name="jacuzziComboBox" Text="{Binding Jacuzzi, Converter={StaticResource Translate}}" Height="Auto" Margin="3" Grid.Row="8"  VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="בריכה" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+            <ComboBox x:Name="poolComboBox" Text="{Binding Pool, Converter={StaticResource Translate}}"  Height="Auto" Margin="3" Grid.Row="10" VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="תאריך יציאה" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <DatePicker x:Name="releaseDateDatePicker"  Margin="3" Grid.Row="2"  VerticalAlignment="Center" />
+            <TextBlock Text="תת אזור מבוקש" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+               <ComboBox x:Name="subAreaComboBox" Style="{StaticResource cities}"  IsEditable="True"  HorizontalContentAlignment="Right"  Height="Auto" Margin="3" Grid.Row="4" Text="{Binding SubArea, Mode=OneWayToSource, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="Auto" MinWidth="120"/>
+            <TextBlock Text="סוג היחידה"  Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+               <ComboBox x:Name="typeComboBox" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120" Text="{Binding HostingType,Converter={StaticResource Translate}}"/>
+            <Button x:Name="AddGuestRequestButton"  Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="AddGuestRequestButton_Click" ToolTip="לחץ כאן להוספת בקשה" Grid.Row="11">
+                <materialDesign:PackIcon Kind="Add"   Height="Auto"  Width="Auto" />
+                </Button>
+        </Grid>
+    </Grid>
+</Page>
